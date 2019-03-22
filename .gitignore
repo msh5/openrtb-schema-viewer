@@ -55,12 +55,12 @@ sitemap.xml.gz*~
 # PROJECT-SPECIFIC #
 ####################
 
-node_modules
-bower_components
+#node_modules
+#bower_components
 prod
 /dev.html
 /basic.html
 /index.html
-styles/*.*
+#styles/*.*
 jsdoc
 .grunt
