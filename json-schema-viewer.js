@@ -12,7 +12,7 @@ if (typeof JSV === 'undefined') {
         /**
          * The root schema to load.
          */
-        schema: '',
+        schema: '/share/schema/2.5-request.json',
 
         /**
          * If true, render diagram only on init, without the jQuery Mobile UI.
@@ -58,7 +58,7 @@ if (typeof JSV === 'undefined') {
         /**
          * The default duration of the node transitions
          */
-        duration: 750,
+        duration: 500,
 
         /**
          * Counter for generating unique ids
@@ -184,6 +184,10 @@ if (typeof JSV === 'undefined') {
                     }
 
                 }
+            });
+
+            $('body').on('pagecontainertransition', function() {
+                $('#info-panel').panel('open');
             });
 
             //store info-panel state
@@ -824,15 +828,9 @@ if (typeof JSV === 'undefined') {
         /**
          * Reset the tree starting from the passed source.
          */
-        resetTree: function (source, level) {
+        resetTree: function (source) {
             JSV.visit(source, function(d) {
-                if (d.children && d.children.length > 0 && d.depth > level && !JSV.labels[d.name]) {
-                    JSV.collapse(d);
-                    //d._children = d.children;
-                    //d.children = null;
-                }else if(JSV.labels[d.name]){
-                    JSV.expand(d);
-                }
+                JSV.expand(d);
             }, function(d) {
                 if (d.children && d.children.length > 0) {
                     return d.children;
@@ -862,7 +860,7 @@ if (typeof JSV === 'undefined') {
             // Layout the tree initially and center on the root node.
             // Call visit function to set initial depth
             JSV.tree.nodes(root);
-            JSV.resetTree(root, 1);
+            JSV.resetTree(root);
             JSV.update(root);
 
             //reset the style for viewer-page
